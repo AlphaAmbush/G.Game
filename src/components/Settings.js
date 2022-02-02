@@ -24,7 +24,7 @@ const Settings = ({colNameHandler,colNames}) => {
     setItems(newItems)
   }
 
-  const toggleVisibiliy =(e)=>{
+  const toggleVisibiliy =(e)=>{// to set visibility
     let index = e.target.getAttribute('data-id')
     let newItems = [...items]
     newItems[index].visible = !newItems[index].visible

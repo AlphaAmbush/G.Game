@@ -1,31 +1,31 @@
 import React from 'react';
 import {useState, useContext, useEffect,Suspense} from 'react'
-import DateComponent from './DateComponent'
-import Settings from './Settings'
-import ColNames from './ColumnNames'
-import Table from './Table'
+import DateComponent from './components/DateComponent'
+import Settings from './components/Settings'
+import ColNames from './data/ColumnNames'
+import Table from './components/Table'
 
 
 function App() {
-  const [showSetting, setShowSetting] = useState(false);
-  const [colNames, setColNames] = useState(ColNames)
-  const [haveDateRange, setHaveDateRange] = useState(false);
-  const [dateRange, setDateRange] = useState(false);
-  let recivedColNames = []
 
-  const dateHandler = (dRange) =>{
+  const [showSetting, setShowSetting] = useState(false);//display or hide setting
+  const [colNames, setColNames] = useState(ColNames)//for updating position or visibility of column names
+  const [haveDateRange, setHaveDateRange] = useState(false);//to check if we have date range
+  const [dateRange, setDateRange] = useState(false);
+  let recivedColNames = []//to change column names after apply is clicked
+
+  const dateHandler = (dRange) =>{//callback to get date range
    setDateRange(dRange)
    setHaveDateRange(true)
   }
   
-  const colNameHandler = (items) => {
+  const colNameHandler = (items) => {//callback to get column Names
     recivedColNames = items
   }
-  const cancelHandler = () =>{
+  const cancelHandler = () =>{ //cancel button
     setShowSetting(!showSetting)
-    
   }
-  const applyHandler = () =>{
+  const applyHandler = () =>{//apply column configuration
     setColNames(recivedColNames)
     setShowSetting(!showSetting)
   }
@@ -43,7 +43,6 @@ function App() {
         <button onClick={()=>applyHandler()}>Apply Changes</button>
       </>
       }
-      
       {haveDateRange?<Table colNames = {colNames} dateRange = {dateRange}/>:""}
     </div>
   </>

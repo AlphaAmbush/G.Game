@@ -11,7 +11,7 @@ export default function urlGenerator  (dateRange)  {
     ('0' + (dateRange[1].getMonth()+1)).slice(-2) +"-"+
     ('0' + dateRange[1].getDate()).slice(-2)
   )
-  let reportURL = "http://go-dev.greedygame.com/v3/dummy/report?"+startDate+"&"+endDate
+  let reportURL = "https://go-dev.greedygame.com/v3/dummy/report?"+startDate+"&"+endDate
 
   return reportURL
 };

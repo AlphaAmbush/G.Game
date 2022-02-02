@@ -1,16 +1,6 @@
-export default function refactoredData(col,data,appdata){
+export default function refactoredData(col,data){
    var cell = null
 
-    const checkApp = (id)=>{
-        let returnValue = null
-        appdata.map((app)=>{
-            if(app.app_id==id)
-            {
-                returnValue = app.app_name
-            }
-        })
-        return returnValue
-    }
     switch (col) {
       case 'Date':
           let date = new Date(data.date)
@@ -21,7 +11,7 @@ export default function refactoredData(col,data,appdata){
             }).format(date))
         break;
       case 'App Name':
-            cell = checkApp(data.app_id)
+            cell = (data.app_name)
         break;
       case 'AD Request':
             cell = (new Intl.NumberFormat('en-IN',{
@@ -48,10 +38,10 @@ export default function refactoredData(col,data,appdata){
             }).format(data.revenue))
         break;
       case 'Fill Rate':
-             cell = ((data.requests/data.responses)*100).toFixed(2)+"%";
+             cell = (data.fill_rate).toFixed(2)+"%";
       break;
       case 'CTR':
-           cell = ((data.clicks/data.impressions)*100).toFixed(2)+"%";
+           cell = (data.ctr).toFixed(2)+"%";
       break;
     }
     

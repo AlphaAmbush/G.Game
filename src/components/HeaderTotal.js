@@ -3,22 +3,22 @@ import React from 'react';
 const HeaderTotal = ({col,repData}) => {
     function numFormatter (labelValue) {
 
-    // Nine Zeroes for Billions
-    return (Math.abs(Number(labelValue)) >= 1.0e+9)
+        // Nine Zeroes for Billions
+        return (Math.abs(Number(labelValue)) >= 1.0e+9)
 
-    ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
-    // Six Zeroes for Millions 
-    : Math.abs(Number(labelValue)) >= 1.0e+6
+        ? (Math.abs(Number(labelValue)) / 1.0e+9).toFixed(2) + "B"
+        // Six Zeroes for Millions 
+        : Math.abs(Number(labelValue)) >= 1.0e+6
 
-    ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
-    // Three Zeroes for Thousands
-    : Math.abs(Number(labelValue)) >= 1.0e+3
+        ? (Math.abs(Number(labelValue)) / 1.0e+6).toFixed(2) + "M"
+        // Three Zeroes for Thousands
+        : Math.abs(Number(labelValue)) >= 1.0e+3
 
-    ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
+        ? (Math.abs(Number(labelValue)) / 1.0e+3).toFixed(2) + "K"
 
-    : (Math.abs(Number(labelValue)));
+        : (Math.abs(Number(labelValue)));
 
-}
+    }
 
     let cell = null
     let data1=0;
@@ -64,8 +64,8 @@ const HeaderTotal = ({col,repData}) => {
              repData.map((item)=>{
                  cell = cell+ item.revenue
              })
-           
-                 cell ="$" + (numFormatter(cell))
+             
+                cell ="$" + (numFormatter(cell.toFixed(2)))
 
         break;
         case 'Fill Rate':

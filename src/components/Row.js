@@ -1,9 +1,9 @@
 import React from 'react';
-import refactoredData from './refactoredData'
-const Row = ({col,repData,appData}) => {
+import refactoredData from '../functions/refactoredData'
+const Row = ({col,repData}) => {
   const cellData = []
   col.map((column)=>{
-    cellData.push(refactoredData(column,repData,appData))
+    cellData.push(refactoredData(column,repData))
   })
   
   return (
