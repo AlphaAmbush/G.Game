@@ -3,7 +3,7 @@ import refactoredData from '../functions/refactoredData'
 const Row = ({col,repData}) => {
   const cellData = []
   col.map((column)=>{
-    cellData.push(refactoredData(column,repData))
+    cellData.push(refactoredData(column.name,repData))
   })
   
   return (

@@ -6,21 +6,18 @@ import {FaFilter} from 'react-icons/fa'
 import Row from './Row'
 import HeaderTotals from './HeaderTotal'
 import dataAddNewColumns from '../functions/dataAddNewColumns'
-
+import {FaSearch} from 'react-icons/fa'
 
 const Table = ({colNames,dateRange}) => {
   const [loading, setLoading] = React.useState(true);//set false after data is fetched
   let url = urlGenerator(dateRange)//simple function to add date in url
-
   let data = (useFetch(url))//custom hook which return loading and product
   let appData = (useFetch('https://go-dev.greedygame.com/v3/dummy/apps'))
-
   dataAddNewColumns(data,appData)// function to add app_name, fill rate and ctr components
-
   let visibleColumn = [] // data of which columns are visible
   colNames.map((col)=>{//add all visible column to above data
     if(col.visible) {
-      visibleColumn.push(col.name)
+      visibleColumn.push(col)
     }
   })
 
@@ -49,6 +46,7 @@ const Table = ({colNames,dateRange}) => {
     }
   },[appData,data])
 
+
   const handleSort = (i,e) =>{
     setLoading(true)
 
@@ -66,10 +64,11 @@ const Table = ({colNames,dateRange}) => {
       };
     };
     
-    let columnName = visibleColumn[i]
+    let columnName = visibleColumn[i].name
     let attributeName = getAttributeName(columnName)
-    data.products.data.sort(sort_by(attributeName, true));
-    setLoading(true);
+    data.products.data.sort(sort_by(attributeName, visibleColumn[i].sorted));
+    visibleColumn[i].sorted = !visibleColumn[i].sorted
+    setLoading(true)
   }
 
   if(!loading){
@@ -85,14 +84,15 @@ const Table = ({colNames,dateRange}) => {
         </tr>
         <tr >
         {visibleColumn.map((col,index)=>{
-          return(
-             <th scope="col" key={index}>{col}</th>
+          return(<>
+              <th scope="col"  key={index}>{col.name}</th>
+             </>
         )})}
         </tr>
         <tr>
         {visibleColumn.map((col,index)=>{
           return(
-           <HeaderTotals key={index} col = {col} repData = {data.products.data} />
+           <HeaderTotals key={index} col = {col.name} repData = {data.products.data} />
         )})}
         </tr>
      </thead>
